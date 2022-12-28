@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="functions.js"></script>
+    <script>
+        console.log("salt> In the head.");
+        //document.title = "A Saltier title";
+    </script>
+
+
+</head>
+
+<body>
+    <script>
+
+        console.log("salt> Start of body");
+    </script>
+    <main>
+        <div name="content" class="big bold bright">Content 1</div>
+        <div class="big bold" id="companyName">Content 2</div>
+        <div name="content" id="extra"  class="big">Content 3</div>
+
+        <ul id="list">
+
+        </ul>
+
+
+
+    </main>
+    <script>
+        const companyName = myFunctions.getCompanyName();
+        document.getElementById("companyName").innerHTML = companyName;
+        //document.getElementsByTagName("div")[1].innerHTML = companyName;
+        //document.getElementsByTagName("div").innerHTML = companyName;
+        //console.log(`salt> End of body. Comapny name is ${name}`);
+        const boldNodes = document.getElementsByClassName("bold");
+
+        for (let i = 0; i < boldNodes.length; i++) {
+            boldNodes[i].innerHTML += " ... and bold";
+        }
+
+        // Or to Select with QuerySelector/all
+        //const companyNameElement = document.querySelector('#companyName');
+        //companyNameElement.innerHTML = companyName + ' set using a query selector by id';
+
+        //const boldNodesQuerySelected = document.querySelectorAll('.bold');
+        //for (let i = 0; i < boldNodes.length; i++) {
+        //  boldNodes[i].innerHTML += ' ... and bold selected with query';
+        //}
+
+        // Write a function addListInMain that allows you to create an unordered list of X number of items. Define the function in the first <script> tag.
+        //Then call the function at the end of the last <script>
+
+        function addListInMain(numberOfListItems) {
+            const ulElement = document.createElement('ul');
+
+            for (let i = 0; i < numberOfListItems; i++) {
+                const liItem = document.createElement('li');
+                liItem.textContent = `Item #${i + 1}`
+
+                ulElement.appendChild(liItem);
+            }
+
+            const main = document.querySelector('main');
+            main.appendChild(ulElement);
+        }
+        addListInMain(10);
+        
+        //Removing elements
+        function removeDivById(id){
+            const divToRemove = document.querySelector(id);
+            if(divToRemove != undefined)
+            {
+                divToRemove.remove();
+            }
+        }
+        removeDivById("#extra");
+
+    </script>
+</body>
+
+</html>

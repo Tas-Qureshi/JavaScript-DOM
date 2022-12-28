@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        //------------------- OR----------------------------------
+        function getUsers(element) {
+            fetch('https://randomuser.me/api/?gender=female&results=30')
+                .then(response => response.json())
+                .then(data => {
+
+                    const userList = document.createElement('div');
+
+                    for (let i = 0; i < data.results.length; i++) {
+                        const user = data.results[i];
+
+                        const titleHeading = document.createElement('h2');
+                        titleHeading.textContent = `${user.name.tittle}`;
+
+                        const nameHeading = document.createElement('h3');
+                        nameHeading.textContent = `${user.name.first} ${user.name.last}`;
+
+                        const userImage = document.createElement('img');
+                        userImage.src = `${user.picture.thumbnail}`;
+
+                        const userDiv = document.createElement('div');
+                        userDiv.appendChild(titleHeading);
+                        userDiv.appendChild(nameHeading);
+                        userDiv.appendChild(userImage);
+
+                        userList.appendChild(userDiv);
+
+                    }
+
+                    element.appendChild(userList);
+
+                });
+
+        }
+        // getUsers();
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainElement = document.querySelector("main");
+            getUsers(mainElement);
+        });
+
+        /*function createUserNameHeader(user) {
+            const userHeading = document.createElement('h2');
+            userHeading.textContent = `${user.name.title} ${user.name.first} ${user.name.last}`
+            return userHeading;
+        }
+
+        function createUserImage(user) {
+            const userImage = document.createElement('img');
+            userImage.src = `${user.picture.thumbnail}`;
+            return userImage;
+        }*/
+
+    </script>
+</head>
+
+<body>
+    <main>
+        Enter your name: <input type="text" id="fname">
+        <button id="" onclick="searchName();">Search</button>
+    </main>
+    <script>
+        function searchName() {
+
+
+            const input = document.getElementById("fname").value;
+            const users = document.querySelectorAll("div");
+            users[0].textContent = "";
+
+             
+            for (let i = 1; i < users.length; i++) {
+                //console.log(users[i]);
+                const userToSearch = users[i].querySelector("h3").textContent.toLowerCase();
+                
+                if (userToSearch.includes(input.toLowerCase())) {
+                    //console.log("Great");
+                    
+                    console.log(userToSearch );
+                    users[0].appendChild(users[i]);
+                }   
+            }
+        }
+    </script>
+</body>
+
+</html>

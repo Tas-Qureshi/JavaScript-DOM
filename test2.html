@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mainResult {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 80px;
+        }
+
+        .negativeResult {
+            background-color: red;
+            color: white;
+        }
+
+        .positiveResult {
+            background-color: green;
+            color: white;
+        }
+    </style>
+    <script>
+
+        function addResultStyling() {
+            const mainResultElements = document.querySelectorAll('.mainResult');
+
+
+            for (let i = 0; i < mainResultElements.length; i++) {
+
+                const convertedNumber = Number(mainResultElements[i].textContent);
+                if (Number.isNaN(convertedNumber)) {
+
+                }
+                if (convertedNumber < 0) {
+                    mainResultElements[i].classList.add('negativeResult');
+                }
+                if (convertedNumber > 0) {
+                    mainResultElements[i].classList.add('positiveResult');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Document is loaded, y'all");
+            addResultStyling();
+        });
+        function invertColorsOfResults() {
+            //const element = document.querySelectorAll('.mainResult');
+            const mainResultElements = document.querySelectorAll('.mainResult');
+
+            for(let i =0 ;i < mainResultElements.length; i++)
+            {
+                const element = mainResultElements[i];
+                if(element.classList.contains('negativeResult')){
+                    element.classList.remove('negativeResult');
+                    element.classList.add('positiveResult');
+                    continue;
+                }
+                if (element.classList.contains('positiveResult')) {
+                    element.classList.remove('positiveResult');
+                    element.classList.add('negativeResult');
+                    continue;
+                }
+            }
+        }
+        
+    </script>
+
+</head>
+
+<body>
+    <main>
+        <h1 class="mainResult">1000</h1>
+        <h1 class="mainResult">-1000</h1>
+
+        <h1 class="mainResult">A name - not a number</h1>
+        <!-- onclick="invertColorsOfResults();" -->
+        <input type="submit" id="btnInversion"  placeholder="Change Color" />
+    </main>
+
+    <script>
+    // const btn = document.querySelector('#btnInversion');
+    // btn.addEventListener('click', () => {
+    //     invertColorsOfResults();
+    // });
+    const btn = document.getElementById('btnInversion');
+        // btn.onclick = () => {
+        //     invertColorsOfResults();
+        // };
+        btn.onclick = invertColorsOfResults;
+
+         console.log("okaaaaayyy");
+    </script>
+</body>
+
+</html>

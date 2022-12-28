@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <input type="text">
+        <input type="submit" value="Search" id="btnSearch">
+    </main>
+</body>
+
+<script>
+    // function getUsers(element) {
+    //     fetch('https://randomuser.me/api/?gender=female&results=30')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data.results.length);
+    //             const userList = document.createElement('div');
+
+    //             for (let i = 0; i < data.results.length; i++) {
+    //                 const user = data.results[i];
+    //                 const nameElement = document.createElement('h2');
+    //                 nameElement.textContent = `${user.name.title} ${user.name.first} ${user.name.last}`;
+
+    //                 const imageElement = document.createElement('img');
+    //                 imageElement.src = `${user.picture.thumbnail}`;
+
+    //                 userList.appendChild(nameElement);
+    //                 userList.appendChild(imageElement);
+    //             }
+    //             element.appendChild(userList);
+    //         });
+
+    // }
+
+        //event.preventDefault();
+    function getUsers(element) {
+        fetch('https://randomuser.me/api/?gender=female&results=30')
+            .then(response => response.json())
+            .then(data => {
+                const userList = createUserList(data.results)
+                element.appendChild(userList);
+            });
+    }
+    function createUserNameHeader(user) {
+        const userHeading = document.createElement('h2');
+        userHeading.textContent = `${user.name.title} ${user.name.first} ${user.name.last}`
+        return userHeading;
+    }
+
+    function createUserImage(user) {
+        const userImage = document.createElement('img');
+        userImage.src = `${user.picture.thumbnail}`;
+        return userImage;
+    }
+
+
+
+    function createUserList(users) {
+        const userList = document.createElement('div');
+
+        for (let i = 0; i < users.length; i++) {
+            const userDiv = document.createElement('div');
+            
+            userDiv.appendChild(createUserNameHeader(users[i]));
+            userDiv.appendChild(createUserImage(users[i]));
+
+            userList.appendChild(userDiv);
+        }
+
+        return userList;
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainElement = document.querySelector('main');
+        getUsers(mainElement);
+    });
+
+</script>
+
+</html>

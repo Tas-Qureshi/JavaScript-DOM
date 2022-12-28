@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="testFunction.js"></script>
+    <script>
+        console.log("Salt> In the Head");
+        const name = prompt('Whats your name? ');
+        console.log(`Hello ${name}`);
+
+        // function deleteDivById(){
+        //     const divId = document.querySelector('#deleteMe');
+        //     const main = document.querySelector('main');
+        //     main.removeChild(divId);
+            
+
+        // }
+        function removeDivById(id){
+            const divToRemove = document.querySelector('div#'+id);
+
+            //if (divToRemove != undefined)
+            if (!divToRemove)
+            {
+                divToRemove.remove();
+            }
+        }
+        function addListInMain(num) {
+            //const main = document.getElementsByTagName("main");
+            //
+            const itemsList = document.querySelector('#newList');
+            const unorderedList = document.createElement('ul');
+
+            for (let i = 0; i < num; i++) {
+                const liItem = document.createElement('li');
+                liItem.textContent = `Item No: ${i + 1}`
+                unorderedList.appendChild(liItem);
+            }
+            
+            itemsList.appendChild(unorderedList);
+        }
+        
+        //addListInMain(10);
+    </script>
+
+</head>
+
+<body>
+    <script>
+        console.log("Salt> Start of Body");
+    </script>
+    <main>
+        <div id="t3" class="content hello1">Content1</div>
+        <div id="deleteMe">Content 2</div>
+        <div class="content hello3">Content 3</div>
+        <br>
+        <br>
+        <div name="content" class="big bold bright">Content 1</div>
+        <div class="big bold" id="companyName">Content 2</div>
+        <div name="content" class="big">Content 3</div>
+        <div id="newList">
+
+        </div>
+
+    </main>
+    <script>
+        addListInMain(10);
+        const companyName = getCompanyName();
+        console.log(`Salt> End of -body.Company name is ${companyName}`);
+        //document.getElementById("3").innerHTML = companyName;
+        document.querySelector("#t3").innerHTML = companyName;
+        //const byClassName = document.getElementsByClassName("bold");
+        const byClassName = document.querySelectorAll(".bold");
+        for (let i = 0; i < byClassName.length; i++) {
+            byClassName[i].innerHTML = "... and bold";
+        }
+        removeDivById('deleteMe');
+
+    </script>
+</body>
+
+</html>

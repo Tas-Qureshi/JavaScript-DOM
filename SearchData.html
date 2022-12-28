@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .hide {
+  display: none;
+}
+
+</style>
+<body>
+    <main>
+        <div>
+        <input type="search" id="fName">
+        <input type="submit" value="Search" id="btnSearch">
+        </div>
+        <div class="user-cards">
+        <div class="card"> 
+        </div>
+           
+        </div>
+        
+    </main>
+</body>
+
+<script>
+    let users = [];
+    function getUsers(element) {
+        const userList = document.querySelector('.card');
+        
+        fetch('https://randomuser.me/api/?gender=female&results=30')
+
+            .then(response => response.json())
+            .then(data => {
+                users = data.results.map(user => {
+                  const nameElement = document.createElement('h2');
+                  nameElement.textContent = `${user.name.title} ${user.name.first} ${user.name.last} `;
+                  userList.appendChild(nameElement);
+                  
+                  const imageElement = document.createElement('img');
+                  imageElement.src = `${user.picture.thumbnail}`;
+                  userList.appendChild(imageElement);
+                  
+                  element.append(userList);
+                
+                  return {name: user.name.title, image: user.picture.thumbnail, element: '.card'}
+                  
+                });
+            });
+
+// -------------Only Searchs Data ----------------------
+// function getUsers(element) {
+//                 const userList = document.querySelector('.card');
+                
+//                 fetch('https://randomuser.me/api/?gender=female&results=30')
+//                     .then(response => response.json())
+//                     .then(data => {
+
+//                             data.results.forEach(user => {
+//                             const nameElement = document.createElement('h2');
+//                             nameElement.textContent = `${user.name.title} ${user.name.first} ${user.name.last} `;
+                            
+
+//                             const imageElement = document.createElement('img');
+//                             imageElement.src = `${user.picture.thumbnail}`;
+                            
+
+//                             userList.appendChild(nameElement);
+//                             userList.appendChild(imageElement);
+                           
+//                         });
+//                          element.appendChild(userList);
+//                     });
+
+             }
+
+
+
+
+
+
+        //}
+
+    //event.preventDefault();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainElement = document.querySelector('.user-cards');
+        getUsers(mainElement);
+    });
+
+    const btn = document.querySelector('#fName');
+    btn.addEventListener('input', (e) => {
+        //const value = btn.value;
+        const value = e.target.value.toLowerCase();
+        users.forEach(user =>{
+            
+            
+            const isVisble = user.name.toLowerCase().includes(value)
+            
+             user.element.classList.toggle("hide", !isVisible)
+            
+            //console.log(isVisble);
+        });
+        //console.log(value);
+        //console.log(users);
+       
+    });
+</script>
+
+</html>
