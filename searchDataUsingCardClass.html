@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mainDiv {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .card {
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            width: 15%;
+        }
+
+        h2,
+        h4 {
+            text-align: center;
+        }
+
+        img {
+            border-radius: 3px 3px 0 0;
+            width: 100%;
+        }
+
+        .container {
+            padding: 2px 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function getUsers() {
+            const element = document.querySelector("main");
+            fetch('https://randomuser.me/api/?gender=female&results=30')
+                .then(respose => respose.json())
+                .then(data => {
+                    // element.textContent = data.results.length;
+                    //console.log(data.results.length);
+                    const mainDiv = document.createElement("div");
+                    mainDiv.classList.add("mainDiv");
+
+                    for (let i = 0; i < data.results.length; i++) {
+                        const user = data.results[i];
+
+                        const divCard = document.createElement("div");
+                        divCard.classList.add("card");
+
+                        const userImage = document.createElement('img');
+                        userImage.src = `${user.picture.thumbnail}`;
+
+                        const divContainer = document.createElement("div");
+                        divCard.classList.add("container");
+
+                        const userHeading = document.createElement('h2');
+                        userHeading.textContent = `${user.name.title} `;
+
+                        const userName = document.createElement('h4');
+                        userName.textContent = `${user.name.first} ${user.name.last}`;
+
+                        divContainer.appendChild(userHeading);
+                        divContainer.appendChild(userName);
+
+                        divCard.appendChild(userImage);
+                        divCard.appendChild(divContainer);
+                        mainDiv.appendChild(divCard);
+                    }
+                    element.appendChild(mainDiv);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            getUsers();
+        });
+
+
+    </script>
+
+</head>
+
+<body>
+    <main style="text-align: center;">
+        <input id="fname" type="text" style="text-align: center; height: 20px;">
+        <button id="btnSearch" style="height: 26px; width: 130px;">Search</button>
+        <br>
+        <button style="margin-top: 5px; height: 26px; width: 130px;" onclick="getUsers();">backToList</button>
+    </main>
+</body>
+
+<script>
+    function searchName() {
+
+        const input = document.getElementById("fname").value;
+        const users = document.querySelectorAll("div");
+        users[0].textContent = "";
+
+
+        for (let i = 1; i < users.length; i++) {
+            //console.log(users[i]);
+            const userToSearch = users[i].querySelector("h4").textContent.toLowerCase();
+
+            if (userToSearch.includes(input.toLowerCase())) {
+                //console.log("Great");
+
+                console.log(userToSearch);
+                users[0].appendChild(users[i]);
+            }
+        }
+    }
+    const btn = document.getElementById("btnSearch");
+    btn.addEventListener('click', () => {
+        searchName();
+    });
+</script>
+
+</html>

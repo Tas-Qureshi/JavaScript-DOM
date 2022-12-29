@@ -33,7 +33,7 @@
 
                 const convertedNumber = Number(mainResultElements[i].textContent);
                 if (Number.isNaN(convertedNumber)) {
-
+                        return ;
                 }
                 if (convertedNumber < 0) {
                     mainResultElements[i].classList.add('negativeResult');

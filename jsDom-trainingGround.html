@@ -25,11 +25,9 @@
         <div class="big bold" id="companyName">Content 2</div>
         <div name="content" id="extra"  class="big">Content 3</div>
 
-        <ul id="list">
+        <!-- <ul id="list">
 
-        </ul>
-
-
+        </ul> -->
 
     </main>
     <script>
@@ -37,11 +35,12 @@
         document.getElementById("companyName").innerHTML = companyName;
         //document.getElementsByTagName("div")[1].innerHTML = companyName;
         //document.getElementsByTagName("div").innerHTML = companyName;
-        //console.log(`salt> End of body. Comapny name is ${name}`);
+        //console.log(`salt> End of body. Comapny name is ${companyName}`);
         const boldNodes = document.getElementsByClassName("bold");
 
         for (let i = 0; i < boldNodes.length; i++) {
             boldNodes[i].innerHTML += " ... and bold";
+            //boldNodes[i].textContent += " ... and bold";
         }
 
         // Or to Select with QuerySelector/all
@@ -74,6 +73,8 @@
         //Removing elements
         function removeDivById(id){
             const divToRemove = document.querySelector(id);
+            //const divToRemove = document.querySelector('div#' + id);
+            //if(!divToRemove)
             if(divToRemove != undefined)
             {
                 divToRemove.remove();
